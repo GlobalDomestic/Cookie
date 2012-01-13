@@ -33,7 +33,7 @@ Cookie.clear('cookieName');
 **Using Cookie as a constructor:**
 
 ``` JS
-var c = Cookie('cookieName');
+var c = new Cookie('cookieName');
 c.get();
 c.set('cookieValue', OPTIONAL_PARAMS_OBJECT);
 c.clear();
