@@ -58,7 +58,8 @@
 		params = params || {};
 
 		doc.cookie = name + '=' + stringentEncodeURIComponent( value ) +
-			( params.expires !== undef ? '; expires=' + params.expires : ( params.max_age !== undef ? '; max-age=' + params.max_age : '' ) ) +
+			( params.expires !== undef ? '; expires=' + params.expires : '') +
+			( params.max_age !== undef ? '; max-age=' + params.max_age : '' ) +
 			( params.domain !== undef ? '; domain=' + params.domain : '' ) +
 			( params.path !== undef ? '; path=' + params.path : '' ) +
 			( params.secure ? '; secure' : '' );
