@@ -1,26 +1,21 @@
 ( function ( win, doc, undef ) {
 	'use strict';
 
-	var isString = function ( str ) {
-		return Object.prototype.toString.call( str ).match( /\s([a-z]+)/i )[ 1 ].toLowerCase() === 'string';
-	},
-	stringentEncodeURIComponent = function ( str ) {
-		return isString( str ) ? encodeURIComponent( str )
+	var stringentEncodeURIComponent = function ( str ) {
+		return encodeURIComponent( str )
 			.replace( /!/g, '%21' )
 			.replace( /'/g, '%27' )
 			.replace( /\(/g, '%28' )
 			.replace( /\)/g, '%29' )
-			.replace( /\*/g, '%2A' )
-			: str;
+			.replace( /\*/g, '%2A' );
 	},
 	stringentDecodeURIComponent = function ( str ) {
-		return isString( str ) ? decodeURIComponent( str )
+		return decodeURIComponent( str )
 			.replace( /%21/g, '!' )
 			.replace( /%27/g, '\'' )
 			.replace( /%28/g, '(' )
 			.replace( /%29/g, ')' )
-			.replace( /%2A/g, '*' )
-			: str;
+			.replace( /%2A/g, '*' );
 	},
 	obj = function( name, value, params ) {
 		this.name = name;
