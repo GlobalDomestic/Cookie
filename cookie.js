@@ -1,13 +1,9 @@
 ( function ( win, doc, undef ) {
 	'use strict';
 
-	var isString = ( function () {
-		var objTypeRegExp = /\s([a-z]+)/i;
-
-		return function ( str ) {
-			return Object.prototype.toString.call( str ).match( objTypeRegExp )[ 1 ].toLowerCase() === 'string';
-		};
-	}()),
+	var isString = function ( str ) {
+		return Object.prototype.toString.call( str ).match( /\s([a-z]+)/i )[ 1 ].toLowerCase() === 'string';
+	},
 	stringentEncodeURIComponent = function ( str ) {
 		return isString( str ) ? encodeURIComponent( str )
 			.replace( /!/g, '%21' )
@@ -32,28 +28,23 @@
 		this.params = params || {};
 	};
 
-	obj.get = ( function () {
-		var cookieStringRegExp = /\w+=[^;]+/g,
-		cookiePairRegExp = /(\w+)=(.+)/;
-	
-		return function ( name ) {
-			var matches = doc.cookie.match( cookieStringRegExp ),
-			len = matches !== null ? matches.length : 0,
-			ret = [],
-			cookie,
-			i;
+	obj.get = function ( name ) {
+		var matches = doc.cookie.match( /\w+=[^;]+/g ),
+		len = matches !== null ? matches.length : 0,
+		ret = [],
+		cookie,
+		i;
 
-			for ( i = 0; i < len; i++ ) {
-				cookie = matches[ i ].match( cookiePairRegExp );
+		for ( i = 0; i < len; i++ ) {
+			cookie = matches[ i ].match( /(\w+)=(.+)/ );
 
-				if ( name === cookie[ 1 ] ) {
-					ret.push( stringentDecodeURIComponent( cookie[ 2 ] ) );
-				}
+			if ( name === cookie[ 1 ] ) {
+				ret.push( stringentDecodeURIComponent( cookie[ 2 ] ) );
 			}
+		}
 
-			return ret;
-		};
-	}());
+		return ret;
+	};
 	obj.set = function ( name, value, params ) {
 		params = params || {};
 
