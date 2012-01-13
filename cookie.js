@@ -7,7 +7,7 @@
 		return function ( str ) {
 			return Object.prototype.toString.call( str ).match( objTypeRegExp )[ 1 ].toLowerCase() === 'string';
 		};
-	})(),
+	}()),
 	stringentEncodeURIComponent = function ( str ) {
 		return isString( str ) ? encodeURIComponent( str )
 			.replace( /!/g, '%21' )
@@ -53,7 +53,7 @@
 
 			return ret;
 		};
-	})();
+	}());
 	obj.set = function ( name, value, params ) {
 		params = params || {};
 
